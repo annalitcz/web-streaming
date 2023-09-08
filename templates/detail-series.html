@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ data['title'] }}</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-gray-100 p-4">
+    <h1>pilih episode</h1>
+    <div class="max-w-4xl max-h-5xl mx-auto bg-white p-6 rounded-lg shadow-md">
+        <h1 class="text-2xl font-semibold mb-4">{{ data['title'] }}</h1>
+
+        <h3 class="text-lg font-semibold mb-2">Episodes :</h3>
+        <ul class="list-disc pl-4 flex flex-wrap gap-3">
+            {% for d in data['episode'] %}
+            <li class="list-none">
+                <a href="{{ d['detail'] }}" target="_blank" class="text-blue-500 hover:underline">
+                    <button class="w-20 bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-700">
+                        {{ d['title'] }}
+                    </button>
+                </a>
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Free Movie</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<style>
+    #loading {
+        display: none;
+        /* Atur tampilan awalnya menjadi none (sembunyikan) */
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 9999;
+        background-color: rgba(255, 255, 255, 0.7);
+        padding: 20px;
+        border-radius: 5px;
+    }
+
+    #loading p {
+        text-align: center;
+        font-weight: bold;
+    }
+</style>
+
+<body class="bg-slate-800">
+    <h1 class="text-xl text-center font-bold mt-3 text-slate-200 mb-3">Anzz Movie</h1>
+    <div class="container mx-auto flex justify-center items-center">
+        <form action="#" id="form" class="mb-3">
+            <div class="mb-4">
+                <input type="text" name="query" id="query" placeholder="Cari Judul Film" class="p-2 border rounded w-56" />
+                <input type="submit" value="Cari" id="cari" class="p-2 w-24 bg-green-500 text-white rounded cursor-pointer" />
+            </div>
+            <div>
+                <label for=""><input type="checkbox" name="providers[]" checked class="provider" value="Netflix" />
+                    Netflix</label>
+                <label for=""><input type="checkbox" name="providers[]" checked class="provider" value="PrimeVideo" />
+                    Prime Video</label>
+                <label for=""><input type="checkbox" name="providers[]" checked class="provider" value="DisneyPlus" />
+                    Disney+</label>
+            </div>
+        </form> 
+    </div>
+    <div id="loading">loading...</div>
+
+    <ul id="result" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 p-3">
+        <!-- Hasil pencarian akan muncul di sini -->
+    </ul>
+
+    <script>
+        const form = document.querySelector("#form");
+        const query = document.querySelector("#query");
+        const result = document.querySelector("#result");
+        const loading = document.querySelector("#loading");
+
+        form.addEventListener("submit", function (e) {
+            e.preventDefault();
+            loading.style.display = "block"; 
+            const xhr = new XMLHttpRequest();
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState == 4) {
+                    loading.style.display = "none";
+                    if (xhr.status != 200) {
+                        result.innerHTML = `
+                            <li class='text-red-500'>
+                                <h1>Ops, ada masalah dengan server. ${xhr.status}</h1>
+                            </li>
+                        `;
+                        return;
+                    }
+
+                    const jsonData = JSON.parse(xhr.responseText);
+                    result.innerHTML = "";
+                    jsonData.forEach(function (data) {
+                        const card = document.createElement("li");
+                        card.classList.add("bg-slate-700", "rounded-lg", "shadow", "pb-4", "pl-2", "pr-2", "pt-2");
+
+                        const img = document.createElement("img");
+                        img.src = data.thumb;
+                        img.alt = data.title;
+                        img.classList.add("w-full", "h-auto", "rounded-md", "mb-2");
+
+                        const titleLink = document.createElement("a");
+                        titleLink.href = data.detail;
+                        titleLink.target = "_blank";
+                        titleLink.classList.add(
+                            "text-blue-500",
+                            "font-semibold",
+                            "text-lg",
+                            "block",
+                            "mb-2"
+                        );
+                        titleLink.textContent = data.title;
+
+                        card.appendChild(img);
+                        card.appendChild(titleLink);
+
+                        result.appendChild(card);
+                    });
+
+                    if (jsonData.length <= 0) {
+                        result.innerHTML = `
+                            <li>
+                                <h1>Maaf, film yang anda cari tidak ditemukan</h1>
+                            </li>
+                        `;
+                    }
+                }
+            };
+            //on error
+            xhr.onerror = function () {
+                loading.style.display = "none";
+                result.innerHTML = `
+                            <li>
+                                <h1>Ops, ada masalah dengan server. ${xhr.status}</h1>
+                            </li>
+                        `;
+            };
+            let apiUrl = "/api/search?query=" + query.value;
+            const providers = document.querySelectorAll(".provider:checked");
+            if (providers.length > 0) {
+                const providerValues = Array.from(providers).map(
+                    (provider) => provider.value
+                );
+                apiUrl += "&providers=" + providerValues.join(",");
+            }
+            xhr.open("GET", apiUrl, true);
+            xhr.send();
+        });
+    </script>
+</body>
+
+</html>
