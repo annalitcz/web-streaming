@@ -2,7 +2,7 @@ import requests, json, base64
 from bs4 import BeautifulSoup
 
 
-class OppaDrama(object):
+class Drakor(object):
     servers = ["http://185.217.95.34"]
     sandbox = "allow-scripts allow-same-origin"
 

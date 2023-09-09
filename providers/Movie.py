@@ -2,7 +2,7 @@ import requests, json, base64
 from bs4 import BeautifulSoup
 
 
-class Muvi(object):
+class Movie(object):
     servers = ["http://128.199.130.38"]
     sandbox = None
 
