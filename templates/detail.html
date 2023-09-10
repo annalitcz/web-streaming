@@ -4,13 +4,28 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="https://i.pinimg.com/564x/b5/c6/a2/b5c6a28a7e5fb2743b8d1f2d25e319ea.jpg">
     <title>{{ data['title'] }}</title>
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
+<style>
+    /* fonts */
+    @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200&display=swap");
+    @import url('https://fonts.googleapis.com/css2?family=Rubik+Iso&display=swap');
 
-<body class="bg-gray-100 p-4">
-    <div class="max-w-2xl mx-auto bg-white p-6 rounded-lg shadow-md">
-        <h1 class="text-2xl font-semibold mb-4">{{ data['title'] }}</h1>
+    .popins{
+      font-family: 'Poppins', sans-serif;
+    }
+
+    .rubik{
+      font-family: 'Rubik Iso', cursive;
+    }
+</style>
+
+<body class="bg-gray-100 p-4 popins">
+    <div class="max-w-2xl mx-auto bg-white mt-14 p-6 rounded-lg shadow-md">
+        <h1 class="text-2xl text-center font-semibold mb-4">{{ data['title'] }}</h1>
+        <!-- !cok <img src="{{ data['thumb'] }}" alt="{{ data['title'] }}" width="200" height="200"> -->
 
         <h3 class="text-lg font-semibold mb-2">Stream :</h3>
         <ul class="list-disc pl-4 flex flex-wrap gap-2">
@@ -37,6 +52,9 @@
                 </li>
             {% endfor %}
         </ul>
+    </div>
+    <div class="fixed w-full bottom-2">
+        <h2 class="rubik text-center text-2xl font-bold">Anzz Movie</h2>
     </div>
 </body>
 
