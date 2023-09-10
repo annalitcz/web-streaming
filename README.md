@@ -1,6 +1,6 @@
 # free streaming 🎥
 
-streaming gratis tanpa iklan, web ini menggunakan API pihak ke-3. di web ini tersedia film, anime dan drakor.
+Streaming gratis tanpa iklan yang mengganggu, di web ini tersedia film, anime dan drakor.
 
 ## Link Demo
 
