@@ -1,7 +1,7 @@
 from . import PusatFilm
 from . import Movie
 from . import Drakor
-from . import Lk21
+# from . import Lk21
 
 class Provider(object):
     def __init__(self, **kwargs):
@@ -9,7 +9,7 @@ class Provider(object):
             PusatFilm.PusatFilm(),
             Movie.Movie(),
             Drakor.Drakor(),
-            Lk21.LK21()
+            # Lk21.LK21()
         ]
 
     def listProviders(self):
