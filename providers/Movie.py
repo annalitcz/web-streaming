@@ -3,10 +3,10 @@ from bs4 import BeautifulSoup
 
 
 class Movie(object):
-    servers = ["http://128.199.130.38"]
-    sandbox = None
+     servers = ["http://128.199.130.38"]
+     sandbox = None
 
-    def search(self, query,page=1):
+     def search(self, query,page=1):
         result = []
         for url in self.servers:
             if int(page) > 1:
@@ -40,7 +40,7 @@ class Movie(object):
                 print(f"error on {_url} : " + str(e))
                 pass
         return result
-    def get(self, url):
+     def get(self, url):
         r = requests.get(url, verify=False)
         soup = BeautifulSoup(r.text, "html.parser")
         # find a.btn-01
