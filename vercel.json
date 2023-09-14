@@ -1,12 +1,4 @@
 {
   "builds": [{ "src": "main.py", "use": "@vercel/python" }],
-  "routes": [
-    {
-      "src": "/api/.*",
-      "dest": "main.py",
-      "config": {
-          "timeout": 60 
-        }
-    }
-  ]
+  "routes": [{ "src": "/(.*)", "dest": "main.py" }]
 }
