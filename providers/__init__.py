@@ -1,15 +1,13 @@
 from . import PusatFilm
 from . import Movie
 from . import Drakor
-from . import Lk21
 
 class Provider(object):
     def __init__(self, **kwargs):
         self.providers = [
             PusatFilm.PusatFilm(),
             Movie.Movie(),
-            Drakor.Drakor(),
-            Lk21.LK21()
+            Drakor.Drakor()
         ]
 
     def listProviders(self):
