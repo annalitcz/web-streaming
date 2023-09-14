@@ -5,10 +5,8 @@
       "src": "/api/.*",
       "dest": "main.py",
       "config": {
-        "api": {
           "timeout": 60 
         }
-      }
     }
   ]
 }
