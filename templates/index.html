@@ -230,12 +230,31 @@
         clip-path: inset(0 0 0 100%);
       }
     }
+
+    .closebtn {
+      margin-left: 15px;
+      color: white;
+      font-weight: bold;
+      float: right;
+      font-size: 22px;
+      line-height: 20px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .closebtn:hover {
+      color: black;
+    }
   </style>
 
   <body class="bg-slate-800 popins">
+
+    <!-- title -->
     <h1 class="text-4xl text-center font-bold mt-3 text-slate-200 mb-3 rubik">
       Anzz Movie
     </h1>
+
+    <!-- form -->
     <div class="container mx-auto flex justify-center items-center">
       <form action="#" id="form" class="mb-3">
         <div class="mb-4">
@@ -270,6 +289,21 @@
         <p class="text-white text-sm text-center">*pilih salah satu</p>
       </form>
     </div>
+
+    <!-- alert -->
+    <div class="w-full flex justify-center items-center">
+      <div class="w-80 bg-yellow-500 p-5 text-center text-white rounded-lg">
+        <span class="closebtn" onclick="this.parentElement.style.display='none';"
+          >&times;</span
+        >
+        <div>
+          <strong>Warning!</strong> 
+          <p>jika <span class="font-bold text-red-500">server 504</span> coba refresh halaman dan jika tetap sama hasilnya mungkin server limit</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- loading -->
     <div id="loading">
       <div id="wifi-loader">
         <svg class="circle-outer" viewBox="0 0 86 86">
@@ -289,9 +323,10 @@
       </div>
     </div>
 
+    <!-- result -->
     <div
       id="result"
-      class="flex flex-wrap justify-center items-center gap-4 p-2"
+      class="flex flex-wrap justify-center items-center gap-x-4 gap-y-20 p-2"
     ></div>
 
     <script>
@@ -300,7 +335,9 @@
       const result = document.querySelector("#result");
       const loading = document.querySelector("#loading");
 
-      alert("jika server error 504, coba refresh halaman\nkarena server sedang sibuk")
+      // alert(
+      //   "jika server error 504, coba refresh halaman\nkarena server sedang sibuk"
+      // );
 
       form.addEventListener("submit", function (e) {
         e.preventDefault();
@@ -325,21 +362,17 @@
             jsonData.forEach(function (data) {
               const card = document.createElement("div");
               card.classList.add(
-                "bg-slate-700",
-                "w-64",
-                "h-96",
+                "w-44",
+                "h-44",
                 "rounded-lg",
                 "shadow",
-                "pb-4",
-                "pl-3",
-                "pr-3",
-                "pt-2"
+                "pb-4"
               );
 
               const img = document.createElement("img");
               img.src = data.thumb;
               img.alt = data.title;
-              img.classList.add("w-60", "h-72", "rounded-md", "mb-2");
+              img.classList.add("w-44", "h-44", "rounded-md", "mb-2");
 
               const titleLink = document.createElement("a");
               titleLink.href = data.detail;
